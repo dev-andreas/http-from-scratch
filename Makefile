@@ -25,6 +25,7 @@ deploy-vmstack: helm-repo
 		--version 0.97.0 \
 		--namespace monitoring \
 		--create-namespace \
+		-f grafana-values.yaml \
 		--set kubeControllerManager.enabled=false \
 		--set kubeScheduler.enabled=false \
 		--set kubeEtcd.enabled=false \

@@ -1,0 +1,14 @@
+grafana:
+  plugins:
+    - victoriametrics-logs-datasource
+
+defaultDatasources:
+  extra:
+    - name: VictoriaLogs
+      type: victoriametrics-logs-datasource
+      access: proxy
+      url: http://victorialogs.monitoring.svc.cluster.local:9428
+    - name: VictoriaTraces
+      type: jaeger
+      access: proxy
+      url: http://victoriatraces.monitoring.svc.cluster.local:10428/select/jaeger

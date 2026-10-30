@@ -20,3 +20,8 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          env:
+            - name: OTEL_LOGS_ENDPOINT
+              value: http://victorialogs.monitoring.svc.cluster.local:9428
+            - name: OTEL_TRACES_ENDPOINT
+              value: http://victoriatraces.monitoring.svc.cluster.local:10428

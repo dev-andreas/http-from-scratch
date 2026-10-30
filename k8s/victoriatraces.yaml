@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: victoriatraces
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: victoriatraces
+  template:
+    metadata:
+      labels:
+        app: victoriatraces
+    spec:
+      containers:
+        - name: victoriatraces
+          image: victoriametrics/victoria-traces:latest
+          args: ["-storageDataPath=/vtraces", "-retentionPeriod=7d"]
+          ports:
+            - containerPort: 10428
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: victoriatraces
+  namespace: monitoring
+spec:
+  selector:
+    app: victoriatraces
+  ports:
+    - port: 10428
+      targetPort: 10428
